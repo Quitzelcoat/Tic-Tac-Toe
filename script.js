@@ -1,16 +1,5 @@
-/*
-1. Create a Gameboard IIFE Factory.(Done)
-    Inside create an array to save the gameboard.(Done)
-    Create a gameboard.(Done)
-
-    [6,7,8]
-    [3,4,5]
-    [0,1,2]
-
-*/
-
+// This will create the gameboard.
 const Gameboard = (function () {
-
     let gameboard = ['', '', '', '', '', '', '', '', '',];
 
     const getGameboard = () => gameboard;
@@ -43,7 +32,6 @@ const Gameboard = (function () {
                 return gameboard[a];
             }
         }
-
         return null;
     };
 
@@ -56,9 +44,9 @@ const Gameboard = (function () {
         winner,
         isBoardFull,
     };
-
 })();
 
+// To display player name and symbols.
 const players = function(name, symbol) {
     return {
         name,
@@ -66,31 +54,87 @@ const players = function(name, symbol) {
     }
 };
 
+// This will display the gameboard and the winner or loser.
 const displayController = (function() {
-    const player1 = players('player1', 'X');
-    const player2 = players('player2', 'O');
-
+    const playerTurn = document.querySelector(".playerTurn");
+    const results = document.querySelector('.results');
+    const startButton = document.getElementById("start");
+    const restartButton = document.getElementById("restart");
+    const playerOneInput = document.getElementById("playerOne");
+    const playerTwoInput = document.getElementById("playerTwo");
+    
+    const player1 = players(`player 1`, 'X');
+    const player2 = players(`player 2`, 'O');
     let currentPlayer = player1;
+    
+    const updatePlayerName = () => {
+        player1.name = playerOneInput.value;
+        player2.name = playerTwoInput.value;
+
+        playerOneInput.value = '';
+        playerTwoInput.value = '';
+    }
+
+    
+    startButton.addEventListener("click", () => {
+        updatePlayerName();
+        render();
+    });
+
+    restartButton.addEventListener('click', () => {
+        Gameboard.resetGameboard();
+        playerTurn.innerHTML = '';
+        results.innerHTML = '';
+        player1.name = "Player 1";
+        player2.name = "Player 2"
+        render();
+    });
 
     const switchPlayer = () => {
-        currentPlayer = currentPlayer === player1 ? player2 : player1;
+        if(currentPlayer === player1) {
+            currentPlayer = player2;
+
+            playerTurn.innerHTML = `${player2.name}`
+        } else {
+            currentPlayer = player1;
+
+            playerTurn.innerHTML = `${player1.name}`
+        }
+    };
+    
+    const eachClick = () => {
+        const eachCell = document.querySelectorAll('.cell');
+        eachCell.forEach((cell, index) => {
+            cell.addEventListener('click', () => {
+                performClick(index)
+            });
+        });
     };
 
     const render = () => {
         const gameboard = Gameboard.getGameboard();
+        let board = document.getElementById("board");
 
-        console.log(gameboard);
-    }
+        if(board) {
+            const htmlBoard = gameboard.map((cell) => `<div class='cell'>${cell}</div>`).join('');
+            board.innerHTML = htmlBoard;
+            eachClick();
+        }
+
+    };
 
     const anounceWinner = (finalWinner) => {
         if(finalWinner) {
-            console.log(`player ${finalWinner.name} (${finalWinner.symbol}) wins!`);
-        } else {
-            console.log("Its a Tie!");
-        }
-    }
 
-    const click = (user) => {
+            results.innerHTML = `${finalWinner.name} (${finalWinner.symbol}) wins!`;
+
+        } else {
+            results.innerHTML = 'Its a Tie!';
+
+        }
+    };
+
+    const performClick = (user) => {
         if(Gameboard.makeMove(user, currentPlayer.symbol)) {
             render();
 
@@ -107,21 +151,13 @@ const displayController = (function() {
             }
 
         } else {
-            console.log("Invalid move. Please try again.");
+            playerTurn.innerHTML = "Invalid move. Please try again.";
         }
     };
 
     render();
 
     return{
-        click,
+        performClick,
     };
-
-    
 })();
-displayController.click(0);
-displayController.click(3);
-displayController.click(2);
-displayController.click(4);
-displayController.click(7);
-displayController.click(5);
