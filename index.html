@@ -4,24 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main id="container">
+        <div class="header">
+            <h2>Welcome to Tic Tac Toe!</h2>
+        </div>
+        
+        <div id="fullBoard">
+            <div id="board"></div>
+        </div>
     
-    <div id="board"></div>
+        <div class="nameForm">
+            <form class="putNames">
+                <div class="bothPlayers">
+                    
+                    <label class="costum-field" for="playerOne">
+                        <input type="text" name="playerOne" id="playerOne" required>
+                        <span class="placeholder">Player 1</span>
+                    </label>
 
-    <form class="putNames">
-        <label for="playerOne">Player 1:</label>
-        <input type="text" name="playerOne" id="playerOne">
-        <label for="playerTwo">Plyer 2:</label>
-        <input type="text" name="playerTwo" id="playerTwo">
-        <button type="button" id="start">Start</button>
-        <button type="button" id="restart">Restart</button>
-    </form>
+                    <label class="costum-field" for="playerTwo">
+                        <input type="text" name="playerTwo" id="playerTwo" required> 
+                        <span class="placeholder">Player 2</span>
+                    </label>
 
-    <div class="playerTurn"></div>
-
-    <div class="results"></div>
+                    </div> <br/>
+                <div class="controlBtn">
+                    <button type="button" id="start">Start</button>
+                    <button type="button" id="restart">Restart</button>
+                </div>
+            </form>
+        </div>
+    
+        <div class="restDisplay">
+            <div class="playerTurn">Please make a move</div>
+            <div class="results">Winner</div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

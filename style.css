@@ -1,12 +1,165 @@
+body {
+    margin: 0;
+    background-image: url(./images/clover.jpg);
+    background-attachment: fixed;
+    background-repeat: none;
+    background-size: 120% 100%;
+
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    color: hsl(0, 0%, 71%);
+}
+
 .cell {
-    border: 2px solid blue;
+    background-color: hsla(160, 71%, 60%, 0.87);
+    border: 2px solid #5ce0ca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(175, 85%, 8%);
+    font-size: 20px;
+}
+
+.cell:hover {
+    cursor: pointer;
+}
+
+#container {
+    display: grid;
+    grid-template-rows: 1fr 3fr repeat(2, 1fr);
+    
+}
+
+.header {
+    font-size: 22px;
+    padding: 13px 0px;
+    color: hsl(0, 2%, 88%);
+}
+
+#fullBoard {
+    height: 300px;
+
+}
+
+.header, #fullBoard, .nameForm {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.putNames {
+    display: grid;
+    justify-items: center;
+}
+
+.restDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
 }
 
 #board {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 1px;
     width: 25vw;
     height: 25vw;
+}
+
+.bothPlayers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+}
+
+.inputPlayer {
+    justify-items: center;
+    display: grid;
+}
+
+/* label {
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: hsl(167, 44%, 92%);
+    padding-bottom: 15px;
+} */
+
+.costum-field {
+    position: relative;
+    font-size: 14px;
+    padding-top: 20px;
+    margin-bottom: 5px;
+}
+
+
+.costum-field input {
+    border: none;
+    appearance: none;
+    background: #00220a;
+    border-radius: 10px;
+    padding: 12px;
+    width: 150px;
+    outline: none;
+    font-size: 16px;
+    color: #97ffb6;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    
+    /* height: 40px; */
+    /* border-radius: 20px; */
+}
+
+.costum-field .placeholder {
+    position: absolute;
+    left: 12px;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+    color: #a0c5c3;
+    transition: 
+        top 0.3s ease,
+        font-size 0.3s ease,
+        color 0.3s ease;
+}
+
+.costum-field input:valid + .placeholder,
+.costum-field input:focus + .placeholder {
+    top: 10px;
+    font-size: 16px;
+    color: #d7f1f0;
+    font-weight: 700;
+}
+
+#start {
+    margin-right: 3rem;
+}
+
+button {
+    border: none;
+    width: 120px;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: #a0c5c3;
+    border-radius: 20px;
+
+    background-color: hsla(138, 100%, 36%, 0.719);
+    transition: all 0.4s ease;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #a0c5c3;
+    color: #00220a;
+
+    /* background-color: hsla(138, 100%, 12%, 0.733); */
+}
+
+.playerTurn, .results {
+    font-size: 22px;
+    font-style: italic;
+    letter-spacing: 1.5px;
+    color: #a8c4c2;
 }

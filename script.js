@@ -125,12 +125,9 @@ const displayController = (function() {
 
     const anounceWinner = (finalWinner) => {
         if(finalWinner) {
-
             results.innerHTML = `${finalWinner.name} (${finalWinner.symbol}) wins!`;
-
         } else {
             results.innerHTML = 'Its a Tie!';
-
         }
     };
 
